@@ -1,7 +1,7 @@
 {
   "name": "angular-breadcrumb",
   "description": "AngularJS module that generates a breadcrumb from ui-router's states",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "homepage": "http://ncuillery.github.io/angular-breadcrumb",
   "author": {
     "name": "Nicolas Cuillery",
@@ -14,12 +14,10 @@
   "bugs": {
     "url": "https://github.com/ncuillery/angular-breadcrumb/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/ncuillery/angular-breadcrumb/blob/master/LICENSE-MIT"
-    }
-  ],
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/ncuillery/angular-breadcrumb/blob/master/LICENSE-MIT"
+  }],
   "main": "release/angular-breadcrumb.js",
   "engines": {
     "node": ">= 0.10.0"

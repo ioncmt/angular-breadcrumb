@@ -126,7 +126,7 @@ See [API reference](https://github.com/ncuillery/angular-breadcrumb/wiki/API-Ref
 
 #### Bug Fixes
 
-* catch the `$viewContentLoaded` earlier ([bb47dd54](http://github.com/ncuillery/angular-breadcrumb/commit/bb47dd54deb5efc579ccb9b1575e686803dee1c5), closes [#14](http://github.com/ncuillery/angular-breadcrumb/issues/14))
+* catch the `$stateChangeSuccess` earlier ([bb47dd54](http://github.com/ncuillery/angular-breadcrumb/commit/bb47dd54deb5efc579ccb9b1575e686803dee1c5), closes [#14](http://github.com/ncuillery/angular-breadcrumb/issues/14))
 * **sample:**
   * make the CRU(D) about rooms working ([3ca89ec7](http://github.com/ncuillery/angular-breadcrumb/commit/3ca89ec771fd20dc4ab2d733612bdcfb96ced703))
   * prevent direct URL access to a day disabled in the datepicker ([95236916](http://github.com/ncuillery/angular-breadcrumb/commit/95236916e00b19464a3dfe3584ef1b18da9ffb25), closes [#17](http://github.com/ncuillery/angular-breadcrumb/issues/17))

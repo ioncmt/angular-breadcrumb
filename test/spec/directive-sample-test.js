@@ -16,14 +16,18 @@ describe('Breadcrumb directive with sample conf', function() {
     }));
 
     it('interpolates "room.detail" label correctly', inject(function() {
-        goToStateAndFlush('room.detail.edit', {roomId: 3});
+        goToStateAndFlush('room.detail.edit', {
+            roomId: 3
+        });
 
-        controller('RoomDetailCtrl', {'$scope' : scope} );
+        controller('RoomDetailCtrl', {
+            '$scope' : scope
+        });
         compile(scope);
 
         expect(scope.room).toBeDefined();
 
-        scope.$emit('$viewContentLoaded');
+        scope.$emit('$stateChangeSuccess');
         scope.$digest();
 
         console.info('Directive content : ' + element.text());

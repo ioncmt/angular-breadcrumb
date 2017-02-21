@@ -20,7 +20,7 @@ describe('Last step directive with basic conf', function() {
 
         it('renders the last step label correctly', inject(function() {
             goToState('D');
-            scope.$emit('$viewContentLoaded');
+            scope.$emit('$stateChangeSuccess');
             scope.$digest();
 
             console.info('Directive content : ' + element.text());
@@ -32,7 +32,9 @@ describe('Last step directive with basic conf', function() {
     describe('with template', function() {
 
         beforeEach(inject(function($rootScope, $compile) {
-            element = angular.element('<span ncy-breadcrumb-last="{{ncyBreadcrumbLabel}}|{{ncyBreadcrumbLink}}"></span>');
+            element = angular.element(
+                '<span ncy-breadcrumb-last="{{ncyBreadcrumbLabel}}|{{ncyBreadcrumbLink}}"></span>'
+            );
             var compile = $compile(element);
             scope = $rootScope.$new();
             compile(scope);
@@ -41,7 +43,7 @@ describe('Last step directive with basic conf', function() {
 
         it('renders the template correctly', inject(function() {
             goToState('D');
-            scope.$emit('$viewContentLoaded');
+            scope.$emit('$stateChangeSuccess');
             scope.$digest();
 
             console.info('Directive content : ' + element.text());
@@ -71,7 +73,7 @@ describe('Last step directive with basic conf', function() {
 
         it('correctly', inject(function() {
             goToState('D');
-            scope.$emit('$viewContentLoaded');
+            scope.$emit('$stateChangeSuccess');
             scope.$digest();
 
             console.info('Directive content : ' + element.html());
@@ -101,7 +103,7 @@ describe('Last step directive with basic conf', function() {
 
         it('correctly', inject(function() {
             goToState('html');
-            scope.$emit('$viewContentLoaded');
+            scope.$emit('$stateChangeSuccess');
             scope.$digest();
 
             console.info('Directive content : ' + element.html());

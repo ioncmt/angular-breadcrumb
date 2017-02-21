@@ -19,7 +19,7 @@ describe('Breadcrumb directive', function() {
 
         it('correctly', inject(function() {
             goToState('D');
-            scope.$emit('$viewContentLoaded');
+            scope.$emit('$stateChangeSuccess');
             scope.$digest();
 
             console.info('Directive content : ' + element.text());
@@ -52,7 +52,7 @@ describe('Breadcrumb directive', function() {
 
         it('correctly', inject(function() {
             goToState('D');
-            scope.$emit('$viewContentLoaded');
+            scope.$emit('$stateChangeSuccess');
             scope.$digest();
 
             console.info('Directive content : ' + element.text());
@@ -69,10 +69,10 @@ describe('Breadcrumb directive', function() {
                 .config(function($breadcrumbProvider) {
                     $breadcrumbProvider.setOptions({
                         template: '<table>' +
-                                '<tr ng-repeat="step in steps">' +
-                                    '<td>{{step.ncyBreadcrumbLabel}}</td>' +
-                                    '<td>{{step.ncyBreadcrumbLink}}</td>' +
-                                '</tr>' +
+                            '<tr ng-repeat="step in steps">' +
+                            '<td>{{step.ncyBreadcrumbLabel}}</td>' +
+                            '<td>{{step.ncyBreadcrumbLink}}</td>' +
+                            '</tr>' +
                             '</table>'
                     });
                 });
@@ -89,7 +89,7 @@ describe('Breadcrumb directive', function() {
 
         it('correctly', inject(function() {
             goToState('D');
-            scope.$emit('$viewContentLoaded');
+            scope.$emit('$stateChangeSuccess');
             scope.$digest();
 
             console.info('Directive content : ' + element.html());
@@ -106,8 +106,8 @@ describe('Breadcrumb directive', function() {
                 .config(function($breadcrumbProvider) {
                     $breadcrumbProvider.setOptions({
                         template: '<div><div ng-repeat="step in steps">' +
-                                '<span ng-bind="step.ncyBreadcrumbLabel"></span>' +
-                                '<span ng-bind-html="step.ncyBreadcrumbLabel"></span>' +
+                            '<span ng-bind="step.ncyBreadcrumbLabel"></span>' +
+                            '<span ng-bind-html="step.ncyBreadcrumbLabel"></span>' +
                             '</div></div>'
                     });
                 });
@@ -124,7 +124,7 @@ describe('Breadcrumb directive', function() {
 
         it('correctly', inject(function() {
             goToState('html');
-            scope.$emit('$viewContentLoaded');
+            scope.$emit('$stateChangeSuccess');
             scope.$digest();
 
             console.info('Directive content : ' + element.html());

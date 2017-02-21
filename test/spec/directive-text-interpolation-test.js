@@ -18,12 +18,14 @@ describe('Text directive with interpolation conf', function() {
     it('interpolates labels correctly', inject(function() {
         goToState('A.B');
 
-        controller('BCtrl', {'$scope' : scope} );
+        controller('BCtrl', {
+            '$scope' : scope
+        });
         compile(scope);
 
         expect(scope.tripleB).toBeDefined();
 
-        scope.$emit('$viewContentLoaded');
+        scope.$emit('$stateChangeSuccess');
         scope.$digest();
 
         console.info('Directive content : ' + element.text());
@@ -34,10 +36,12 @@ describe('Text directive with interpolation conf', function() {
     it('deals with further updates of the scope', inject(function() {
         goToState('A.B');
 
-        controller('BCtrl', {'$scope' : scope} );
+        controller('BCtrl', {
+            '$scope' : scope
+        });
         compile(scope);
 
-        scope.$emit('$viewContentLoaded');
+        scope.$emit('$stateChangeSuccess');
         scope.$digest();
 
         console.info('Directive content : ' + element.text());

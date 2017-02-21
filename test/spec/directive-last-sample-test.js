@@ -9,21 +9,27 @@ describe('Last step directive with sample conf', function() {
     });
 
     beforeEach(inject(function($rootScope, $compile, $controller) {
-        element = angular.element('<span ncy-breadcrumb-last="<a href=\'{{ncyBreadcrumbLink}}\'>{{ncyBreadcrumbLabel}}</a>"></span>');
+        element = angular.element(
+            '<span ncy-breadcrumb-last="<a href=\'{{ncyBreadcrumbLink}}\'>{{ncyBreadcrumbLabel}}</a>"></span>'
+        );
         compile = $compile(element);
         scope = $rootScope.$new();
         controller = $controller;
     }));
 
     it('interpolates "room.detail" label correctly', inject(function() {
-        goToStateAndFlush('room.detail', {roomId: 3});
+        goToStateAndFlush('room.detail', {
+            roomId: 3
+        });
 
-        controller('RoomDetailCtrl', {'$scope' : scope} );
+        controller('RoomDetailCtrl', {
+            '$scope' : scope
+        });
         compile(scope);
 
         expect(scope.room).toBeDefined();
 
-        scope.$emit('$viewContentLoaded');
+        scope.$emit('$stateChangeSuccess');
         scope.$digest();
 
         console.info('Directive content : ' + element.text());

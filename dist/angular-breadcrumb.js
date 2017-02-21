@@ -1,12 +1,12 @@
-/*! angular-breadcrumb - v0.4.1-dev-2016-04-12
+/*! angular-breadcrumb - v0.5.0-dev-2017-02-21
 * http://ncuillery.github.io/angular-breadcrumb
-* Copyright (c) 2016 Nicolas Cuillery; Licensed MIT */
+* Copyright (c) 2017 Nicolas Cuillery; Licensed MIT */
 
 (function (window, angular, undefined) {
 'use strict';
 
 function isAOlderThanB(scopeA, scopeB) {
-    if(angular.equals(scopeA.length, scopeB.length)) {
+    if (angular.equals(scopeA.length, scopeB.length)) {
         return scopeA > scopeB;
     } else {
         return scopeA.length > scopeB.length;
@@ -15,14 +15,20 @@ function isAOlderThanB(scopeA, scopeB) {
 
 function parseStateRef(ref) {
     var parsed = ref.replace(/\n/g, " ").match(/^([^(]+?)\s*(\((.*)\))?$/);
-    if (!parsed || parsed.length !== 4) { throw new Error("Invalid state ref '" + ref + "'"); }
-    return { state: parsed[1], paramExpr: parsed[3] || null };
+    if (!parsed || parsed.length !== 4) {
+        throw new Error("Invalid state ref '" + ref + "'");
+    }
+    return {
+        state: parsed[1],
+        paramExpr: parsed[3] || null
+    };
 }
 
 var $registeredListeners = {};
+
 function registerListenerOnce(tag, $rootScope, event, fn) {
     var deregisterListenerFn = $registeredListeners[tag];
-    if ( deregisterListenerFn !== undefined ) {
+    if (deregisterListenerFn !== undefined) {
         deregisterListenerFn();
     }
     deregisterListenerFn = $rootScope.$on(event, fn);
@@ -37,7 +43,7 @@ function $Breadcrumb() {
         templateUrl: null,
         templateLast: 'default',
         templateLastUrl: null,
-        includeAbstract : false
+        includeAbstract: false
     };
 
     this.setOptions = function(options) {
@@ -48,10 +54,11 @@ function $Breadcrumb() {
 
         var $lastViewScope = $rootScope;
 
-        // Early catch of $viewContentLoaded event
-        registerListenerOnce('$Breadcrumb.$viewContentLoaded', $rootScope, '$viewContentLoaded', function (event) {
+        // Early catch of $stateChangeSuccess event
+        registerListenerOnce('$Breadcrumb.$stateChangeSuccess', $rootScope, '$stateChangeSuccess', function(
+            event) {
             // With nested views, the event occur several times, in "wrong" order
-            if(!event.targetScope.ncyBreadcrumbIgnore &&
+            if (!event.targetScope.ncyBreadcrumbIgnore &&
                 isAOlderThanB(event.targetScope.$id, $lastViewScope.$id)) {
                 $lastViewScope = event.targetScope;
             }
@@ -74,7 +81,7 @@ function $Breadcrumb() {
                 force = false,
                 skip = false;
 
-            for(var i=0, l=chain.length; i<l; i+=1) {
+            for (var i = 0, l = chain.length; i < l; i += 1) {
                 if (chain[i].name === ref.state) {
                     return;
                 }
@@ -82,12 +89,16 @@ function $Breadcrumb() {
 
             conf = $state.get(ref.state);
             // Get breadcrumb options
-            if(conf.ncyBreadcrumb) {
-                if(conf.ncyBreadcrumb.force){ force = true; }
-                if(conf.ncyBreadcrumb.skip){ skip = true; }
+            if (conf.ncyBreadcrumb) {
+                if (conf.ncyBreadcrumb.force) {
+                    force = true;
+                }
+                if (conf.ncyBreadcrumb.skip) {
+                    skip = true;
+                }
             }
-            if((!conf.abstract || $$options.includeAbstract || force) && !skip) {
-                if(ref.paramExpr) {
+            if ((!conf.abstract || $$options.includeAbstract || force) && !skip) {
+                if (ref.paramExpr) {
                     parentParams = $lastViewScope.$eval(ref.paramExpr);
                 }
 
@@ -102,11 +113,12 @@ function $Breadcrumb() {
             var ref = parseStateRef(stateRef),
                 conf = $state.get(ref.state);
 
-            if(conf.ncyBreadcrumb && conf.ncyBreadcrumb.parent) {
+            if (conf.ncyBreadcrumb && conf.ncyBreadcrumb.parent) {
                 // Handle the "parent" property of the breadcrumb, override the parent/child relation of the state
                 var isFunction = typeof conf.ncyBreadcrumb.parent === 'function';
-                var parentStateRef = isFunction ? conf.ncyBreadcrumb.parent($lastViewScope) : conf.ncyBreadcrumb.parent;
-                if(parentStateRef) {
+                var parentStateRef = isFunction ? conf.ncyBreadcrumb.parent($lastViewScope) : conf.ncyBreadcrumb
+                    .parent;
+                if (parentStateRef) {
                     return parentStateRef;
                 }
             }
@@ -117,10 +129,10 @@ function $Breadcrumb() {
         return {
 
             getTemplate: function(templates) {
-                if($$options.templateUrl) {
+                if ($$options.templateUrl) {
                     // templateUrl takes precedence over template
                     return null;
-                } else if(templates[$$options.template]) {
+                } else if (templates[$$options.template]) {
                     // Predefined templates (bootstrap, ...)
                     return templates[$$options.template];
                 } else {
@@ -133,10 +145,10 @@ function $Breadcrumb() {
             },
 
             getTemplateLast: function(templates) {
-                if($$options.templateLastUrl) {
+                if ($$options.templateLastUrl) {
                     // templateUrl takes precedence over template
                     return null;
-                } else if(templates[$$options.templateLast]) {
+                } else if (templates[$$options.templateLast]) {
                     // Predefined templates (default)
                     return templates[$$options.templateLast];
                 } else {
@@ -152,15 +164,16 @@ function $Breadcrumb() {
                 var chain = [];
 
                 // From current state to the root
-                for(var stateRef = $state.$current.self.name; stateRef; stateRef=$$breadcrumbParentState(stateRef)) {
+                for (var stateRef = $state.$current.self.name; stateRef; stateRef = $$breadcrumbParentState(
+                        stateRef)) {
                     $$addStateInChain(chain, stateRef);
-                    if(exitOnFirst && chain.length) {
+                    if (exitOnFirst && chain.length) {
                         return chain;
                     }
                 }
 
                 // Prefix state treatment
-                if($$options.prefixStateName) {
+                if ($$options.prefixStateName) {
                     $$addStateInChain(chain, $$options.prefixStateName);
                 }
 
@@ -180,13 +193,13 @@ function $Breadcrumb() {
 }
 
 var getExpression = function(interpolationFunction) {
-    if(interpolationFunction.expressions) {
+    if (interpolationFunction.expressions) {
         return interpolationFunction.expressions;
     } else {
         // Workaround for Angular 1.2.x
         var expressions = [];
         angular.forEach(interpolationFunction.parts, function(part) {
-            if(angular.isFunction(part)) {
+            if (angular.isFunction(part)) {
                 expressions.push(part.exp);
             }
         });
@@ -243,7 +256,7 @@ function BreadcrumbDirective($interpolate, $breadcrumb, $rootScope) {
 
                     var viewScope = $breadcrumb.$getLastViewScope();
                     scope.steps = $breadcrumb.getStatesChain();
-                    angular.forEach(scope.steps, function (step) {
+                    angular.forEach(scope.steps, function(step) {
                         if (step.ncyBreadcrumb && step.ncyBreadcrumb.label) {
                             var parseLabel = $interpolate(step.ncyBreadcrumb.label);
                             step.ncyBreadcrumbLabel = parseLabel(viewScope);
@@ -255,11 +268,12 @@ function BreadcrumbDirective($interpolate, $breadcrumb, $rootScope) {
                     });
                 };
 
-                registerListenerOnce('BreadcrumbDirective.$viewContentLoaded', $rootScope, '$viewContentLoaded', function (event) {
-                    if(!event.targetScope.ncyBreadcrumbIgnore) {
-                        renderBreadcrumb();
-                    }
-                });
+                registerListenerOnce('BreadcrumbDirective.$stateChangeSuccess', $rootScope, '$stateChangeSuccess',
+                    function(event) {
+                        if (!event.targetScope.ncyBreadcrumbIgnore) {
+                            renderBreadcrumb();
+                        }
+                    });
 
                 // View(s) may be already loaded while the directive's linking
                 renderBreadcrumb();
@@ -271,7 +285,7 @@ BreadcrumbDirective.$inject = ['$interpolate', '$breadcrumb', '$rootScope'];
 
 function BreadcrumbLastDirective($interpolate, $breadcrumb, $rootScope) {
     var $$templates = {
-      'default': '{{ncyBreadcrumbLabel}}'
+        'default': '{{ncyBreadcrumbLabel}}'
     };
 
     return {
@@ -285,7 +299,7 @@ function BreadcrumbLastDirective($interpolate, $breadcrumb, $rootScope) {
             // This should likely be removed in a future version since global
             // templating is now available for ncyBreadcrumbLast
             var template = cElement.attr(cAttrs.$attr.ncyBreadcrumbLast);
-            if(template) {
+            if (template) {
                 cElement.html(template);
             }
 
@@ -299,7 +313,7 @@ function BreadcrumbLastDirective($interpolate, $breadcrumb, $rootScope) {
 
                         var viewScope = $breadcrumb.$getLastViewScope();
                         var lastStep = $breadcrumb.getLastStep();
-                        if(lastStep) {
+                        if (lastStep) {
                             scope.ncyBreadcrumbLink = lastStep.ncyBreadcrumbLink;
                             if (lastStep.ncyBreadcrumb && lastStep.ncyBreadcrumb.label) {
                                 var parseLabel = $interpolate(lastStep.ncyBreadcrumb.label);
@@ -313,11 +327,13 @@ function BreadcrumbLastDirective($interpolate, $breadcrumb, $rootScope) {
                         }
                     };
 
-                    registerListenerOnce('BreadcrumbLastDirective.$viewContentLoaded', $rootScope, '$viewContentLoaded', function (event) {
-                        if(!event.targetScope.ncyBreadcrumbIgnore) {
-                            renderLabel();
-                        }
-                    });
+                    registerListenerOnce('BreadcrumbLastDirective.$stateChangeSuccess', $rootScope,
+                        '$stateChangeSuccess',
+                        function(event) {
+                            if (!event.targetScope.ncyBreadcrumbIgnore) {
+                                renderLabel();
+                            }
+                        });
 
                     // View(s) may be already loaded while the directive's linking
                     renderLabel();
@@ -339,7 +355,7 @@ function BreadcrumbTextDirective($interpolate, $breadcrumb, $rootScope) {
         compile: function(cElement, cAttrs) {
             // Override the default template if ncyBreadcrumbText has a value
             var template = cElement.attr(cAttrs.$attr.ncyBreadcrumbText);
-            if(template) {
+            if (template) {
                 cElement.html(template);
             }
 
@@ -367,7 +383,7 @@ function BreadcrumbTextDirective($interpolate, $breadcrumb, $rootScope) {
                         var viewScope = $breadcrumb.$getLastViewScope();
                         var steps = $breadcrumb.getStatesChain();
                         var combinedLabels = [];
-                        angular.forEach(steps, function (step) {
+                        angular.forEach(steps, function(step) {
                             if (step.ncyBreadcrumb && step.ncyBreadcrumb.label) {
                                 var parseLabel = $interpolate(step.ncyBreadcrumb.label);
                                 combinedLabels.push(parseLabel(viewScope));
@@ -381,11 +397,13 @@ function BreadcrumbTextDirective($interpolate, $breadcrumb, $rootScope) {
                         scope.ncyBreadcrumbChain = combinedLabels.join(separator);
                     };
 
-                    registerListenerOnce('BreadcrumbTextDirective.$viewContentLoaded', $rootScope, '$viewContentLoaded', function (event) {
-                        if(!event.targetScope.ncyBreadcrumbIgnore) {
-                            renderLabel();
-                        }
-                    });
+                    registerListenerOnce('BreadcrumbTextDirective.$stateChangeSuccess', $rootScope,
+                        '$stateChangeSuccess',
+                        function(event) {
+                            if (!event.targetScope.ncyBreadcrumbIgnore) {
+                                renderLabel();
+                            }
+                        });
 
                     // View(s) may be already loaded while the directive's linking
                     renderLabel();
@@ -401,5 +419,4 @@ angular.module('ncy-angular-breadcrumb', ['ui.router.state'])
     .provider('$breadcrumb', $Breadcrumb)
     .directive('ncyBreadcrumb', BreadcrumbDirective)
     .directive('ncyBreadcrumbLast', BreadcrumbLastDirective)
-    .directive('ncyBreadcrumbText', BreadcrumbTextDirective);
-})(window, window.angular);
+    .directive('ncyBreadcrumbText', BreadcrumbTextDirective);})(window, window.angular);
