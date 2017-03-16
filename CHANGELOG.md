@@ -1,3 +1,157 @@
+<a name="0.5.6"></a>
+### 0.5.6 (2017-03-16)
+
+
+#### Bug Fixes
+
+* add ncyBreadcrumbState for ui-sref attribute ([56cec38b](http://github.com/ncuillery/angular-breadcrumb/commit/56cec38b1169ba91a766bb64f44ddff81d8af2a8))
+* Register listeners once to prevent scope being retained ([181f4c09](http://github.com/ncuillery/angular-breadcrumb/commit/181f4c0901007cbd72c7a9470cb9503eb6ab4d5a))
+* organize state-level options in `ncyBreadcrumb` key instead of `data` ([1ea436d3](http://github.com/ncuillery/angular-breadcrumb/commit/1ea436d3f6d5470b7ae3e71e71259dbd2422bc00), closes [#30](http://github.com/ncuillery/angular-breadcrumb/issues/30))
+* curly braces appearing on title of sample app ([855e76cb](http://github.com/ncuillery/angular-breadcrumb/commit/855e76cb33fda607fa3caa230564b77b48262c40))
+* catch the `$viewContentLoaded` earlier ([bb47dd54](http://github.com/ncuillery/angular-breadcrumb/commit/bb47dd54deb5efc579ccb9b1575e686803dee1c5), closes [#14](http://github.com/ncuillery/angular-breadcrumb/issues/14))
+* **$breadcrumb:**
+  * Handle parents provided by StateObject references ([f4288d37](http://github.com/ncuillery/angular-breadcrumb/commit/f4288d375fd1090ffec1d67e85c6300d74d86d37))
+  * check if a state has a parent when looking for an inheritated property ([77e668b5](http://github.com/ncuillery/angular-breadcrumb/commit/77e668b5eb759570a64c2a885e81580953af3201), closes [#11](http://github.com/ncuillery/angular-breadcrumb/issues/11))
+  * Remove abstract state from breadcrumb ([8a06c5ab](http://github.com/ncuillery/angular-breadcrumb/commit/8a06c5abce749027d48f7309d1aabea1e447dfd5), closes [#8](http://github.com/ncuillery/angular-breadcrumb/issues/8))
+* **ncyBreadcrumb:**
+  * Prevent memory leak when label is a binding ([264e10f6](http://github.com/ncuillery/angular-breadcrumb/commit/264e10f680e1bbb8d1e00cf500de39cac4222cfd))
+  * define `$$templates` with var instead of attaching it to `window` ([c35c9d25](http://github.com/ncuillery/angular-breadcrumb/commit/c35c9d255b5e2585d225a961d1efdb51d18f6a55), closes [#55](http://github.com/ncuillery/angular-breadcrumb/issues/55))
+  * display the correct breadcrumb in case of direct access ([e1f455ba](http://github.com/ncuillery/angular-breadcrumb/commit/e1f455ba4def97d3fc76b53772867b5f9daf4232), closes [#10](http://github.com/ncuillery/angular-breadcrumb/issues/10))
+  * display the correct breadcrumb in case of direct access ([97cc0cea](http://github.com/ncuillery/angular-breadcrumb/commit/97cc0cea8af180c7cc02b9eb65ff68d6d8c631ad))
+* **ncyBreadcrumbText:** Allow for separators of different lengths ([223896c0](http://github.com/ncuillery/angular-breadcrumb/commit/223896c0dd2a5b9eb084b514ec6f2bee7d51bee7))
+* **npm:** update package.json after (unclean) npm publish ([ab8161c2](http://github.com/ncuillery/angular-breadcrumb/commit/ab8161c25f98613f725b5e5ff8fe147acd60b365), closes [#52](http://github.com/ncuillery/angular-breadcrumb/issues/52))
+* **sample:**
+  * Send correct url params for the room link in booking view ([876de49a](http://github.com/ncuillery/angular-breadcrumb/commit/876de49a9c5d6e2d75714a606238e9041ed49baf))
+  * make the CRU(D) about rooms working ([3ca89ec7](http://github.com/ncuillery/angular-breadcrumb/commit/3ca89ec771fd20dc4ab2d733612bdcfb96ced703))
+  * prevent direct URL access to a day disabled in the datepicker ([95236916](http://github.com/ncuillery/angular-breadcrumb/commit/95236916e00b19464a3dfe3584ef1b18da9ffb25))
+  * fix a regression born from commit 646f706 ([6aab00c1](http://github.com/ncuillery/angular-breadcrumb/commit/6aab00c1dc20711ad2b034e7786286e85ea83843))
+  * use the same variable in the datepicker and from url params for state `booking.d ([646f7060](http://github.com/ncuillery/angular-breadcrumb/commit/646f70607e494f0e5e3c2483ed69f689684b2742), closes [#16](http://github.com/ncuillery/angular-breadcrumb/issues/16))
+
+
+#### Features
+
+* add the scope-based ncyBreadcrumbIgnore flag ([934c5523](http://github.com/ncuillery/angular-breadcrumb/commit/934c5523208a9615d7cfa3abcb397bbe131332ac), closes [#42](http://github.com/ncuillery/angular-breadcrumb/issues/42))
+* Add a global option to include abtract states ([6f0461ea](http://github.com/ncuillery/angular-breadcrumb/commit/6f0461ea7db36d8e10c29ed10de1f1c08d215a19), closes [#35](http://github.com/ncuillery/angular-breadcrumb/issues/35), [#28](http://github.com/ncuillery/angular-breadcrumb/issues/28))
+* **$breadcrumb:**
+  * Support url params when using `ncyBreadcrumb.parent` property ([55730045](http://github.com/ncuillery/angular-breadcrumb/commit/55730045dcf3b4fb1048c67f1e18953505563ed4), closes [#46](http://github.com/ncuillery/angular-breadcrumb/issues/46))
+  * add the customization of the parent state with a function ([ada09015](http://github.com/ncuillery/angular-breadcrumb/commit/ada09015c49f05a94349dabf078f1ed621811aaa), closes [#32](http://github.com/ncuillery/angular-breadcrumb/issues/32))
+  * add a configuration property for skipping a state in the breadcrumb ([dd255d90](http://github.com/ncuillery/angular-breadcrumb/commit/dd255d906c4231f44b48f066d4db197a9c6b9e27), closes [#9](http://github.com/ncuillery/angular-breadcrumb/issues/9))
+  * allow chain of states customization ([028e493a](http://github.com/ncuillery/angular-breadcrumb/commit/028e493a1ebcae5ae60b8a9d42b949262000d7df), closes [#7](http://github.com/ncuillery/angular-breadcrumb/issues/7))
+* **ncyBreadcrumb:**
+  * watch every expression founded in labels ([1363515e](http://github.com/ncuillery/angular-breadcrumb/commit/1363515e20977ce2f39a1f5e5e1d701f0d7af296))
+  * add 'Element' declaration style '<ncy-breadcrumb />' ([b51441ea](http://github.com/ncuillery/angular-breadcrumb/commit/b51441eafb1659b782fea1f8668c7f455e1d6b4d))
+* **ncyBreadcrumbLast:**
+  * add custom templating ([974f99b5](http://github.com/ncuillery/angular-breadcrumb/commit/974f99b584c85e45b1c0eb1acb4081bf103de06f))
+  * Add a new directive rendering the last step ([1eef24fb](http://github.com/ncuillery/angular-breadcrumb/commit/1eef24fbe862a1e3308181c38f50755843cf4426), closes [#37](http://github.com/ncuillery/angular-breadcrumb/issues/37))
+* **ncyBreadcrumbText:** Add ncyBreadcrumbText directive ([82b2b443](http://github.com/ncuillery/angular-breadcrumb/commit/82b2b443fab220cd9ac7d3a8c90c1edc4291e54a))
+
+
+#### Breaking Changes
+
+* state-level options has been moved under the custom key
+`ncyBreadcrumb` in state's configuration.
+
+To migrate the code follow the example below:
+```
+// Before
+$stateProvider.state('A', {
+  url: '/a',
+  data: {
+    ncyBreadcrumbLabel: 'State A'
+  }
+});
+```
+
+```
+// After
+$stateProvider.state('A', {
+  url: '/a',
+  ncyBreadcrumb: {
+    label: 'State A'
+  }
+});
+```
+See API reference on wiki for more informations.
+ ([1ea436d3](http://github.com/ncuillery/angular-breadcrumb/commit/1ea436d3f6d5470b7ae3e71e71259dbd2422bc00))
+
+
+<a name="0.5.5"></a>
+### 0.5.5 (2017-03-16)
+
+
+#### Bug Fixes
+
+* add ncyBreadcrumbState for ui-sref attribute ([56cec38b](http://github.com/ncuillery/angular-breadcrumb/commit/56cec38b1169ba91a766bb64f44ddff81d8af2a8))
+* Register listeners once to prevent scope being retained ([181f4c09](http://github.com/ncuillery/angular-breadcrumb/commit/181f4c0901007cbd72c7a9470cb9503eb6ab4d5a))
+* organize state-level options in `ncyBreadcrumb` key instead of `data` ([1ea436d3](http://github.com/ncuillery/angular-breadcrumb/commit/1ea436d3f6d5470b7ae3e71e71259dbd2422bc00), closes [#30](http://github.com/ncuillery/angular-breadcrumb/issues/30))
+* curly braces appearing on title of sample app ([855e76cb](http://github.com/ncuillery/angular-breadcrumb/commit/855e76cb33fda607fa3caa230564b77b48262c40))
+* catch the `$viewContentLoaded` earlier ([bb47dd54](http://github.com/ncuillery/angular-breadcrumb/commit/bb47dd54deb5efc579ccb9b1575e686803dee1c5), closes [#14](http://github.com/ncuillery/angular-breadcrumb/issues/14))
+* **$breadcrumb:**
+  * Handle parents provided by StateObject references ([f4288d37](http://github.com/ncuillery/angular-breadcrumb/commit/f4288d375fd1090ffec1d67e85c6300d74d86d37))
+  * check if a state has a parent when looking for an inheritated property ([77e668b5](http://github.com/ncuillery/angular-breadcrumb/commit/77e668b5eb759570a64c2a885e81580953af3201), closes [#11](http://github.com/ncuillery/angular-breadcrumb/issues/11))
+  * Remove abstract state from breadcrumb ([8a06c5ab](http://github.com/ncuillery/angular-breadcrumb/commit/8a06c5abce749027d48f7309d1aabea1e447dfd5), closes [#8](http://github.com/ncuillery/angular-breadcrumb/issues/8))
+* **ncyBreadcrumb:**
+  * Prevent memory leak when label is a binding ([264e10f6](http://github.com/ncuillery/angular-breadcrumb/commit/264e10f680e1bbb8d1e00cf500de39cac4222cfd))
+  * define `$$templates` with var instead of attaching it to `window` ([c35c9d25](http://github.com/ncuillery/angular-breadcrumb/commit/c35c9d255b5e2585d225a961d1efdb51d18f6a55), closes [#55](http://github.com/ncuillery/angular-breadcrumb/issues/55))
+  * display the correct breadcrumb in case of direct access ([e1f455ba](http://github.com/ncuillery/angular-breadcrumb/commit/e1f455ba4def97d3fc76b53772867b5f9daf4232), closes [#10](http://github.com/ncuillery/angular-breadcrumb/issues/10))
+  * display the correct breadcrumb in case of direct access ([97cc0cea](http://github.com/ncuillery/angular-breadcrumb/commit/97cc0cea8af180c7cc02b9eb65ff68d6d8c631ad))
+* **ncyBreadcrumbText:** Allow for separators of different lengths ([223896c0](http://github.com/ncuillery/angular-breadcrumb/commit/223896c0dd2a5b9eb084b514ec6f2bee7d51bee7))
+* **npm:** update package.json after (unclean) npm publish ([ab8161c2](http://github.com/ncuillery/angular-breadcrumb/commit/ab8161c25f98613f725b5e5ff8fe147acd60b365), closes [#52](http://github.com/ncuillery/angular-breadcrumb/issues/52))
+* **sample:**
+  * Send correct url params for the room link in booking view ([876de49a](http://github.com/ncuillery/angular-breadcrumb/commit/876de49a9c5d6e2d75714a606238e9041ed49baf))
+  * make the CRU(D) about rooms working ([3ca89ec7](http://github.com/ncuillery/angular-breadcrumb/commit/3ca89ec771fd20dc4ab2d733612bdcfb96ced703))
+  * prevent direct URL access to a day disabled in the datepicker ([95236916](http://github.com/ncuillery/angular-breadcrumb/commit/95236916e00b19464a3dfe3584ef1b18da9ffb25))
+  * fix a regression born from commit 646f706 ([6aab00c1](http://github.com/ncuillery/angular-breadcrumb/commit/6aab00c1dc20711ad2b034e7786286e85ea83843))
+  * use the same variable in the datepicker and from url params for state `booking.d ([646f7060](http://github.com/ncuillery/angular-breadcrumb/commit/646f70607e494f0e5e3c2483ed69f689684b2742), closes [#16](http://github.com/ncuillery/angular-breadcrumb/issues/16))
+
+
+#### Features
+
+* add the scope-based ncyBreadcrumbIgnore flag ([934c5523](http://github.com/ncuillery/angular-breadcrumb/commit/934c5523208a9615d7cfa3abcb397bbe131332ac), closes [#42](http://github.com/ncuillery/angular-breadcrumb/issues/42))
+* Add a global option to include abtract states ([6f0461ea](http://github.com/ncuillery/angular-breadcrumb/commit/6f0461ea7db36d8e10c29ed10de1f1c08d215a19), closes [#35](http://github.com/ncuillery/angular-breadcrumb/issues/35), [#28](http://github.com/ncuillery/angular-breadcrumb/issues/28))
+* **$breadcrumb:**
+  * Support url params when using `ncyBreadcrumb.parent` property ([55730045](http://github.com/ncuillery/angular-breadcrumb/commit/55730045dcf3b4fb1048c67f1e18953505563ed4), closes [#46](http://github.com/ncuillery/angular-breadcrumb/issues/46))
+  * add the customization of the parent state with a function ([ada09015](http://github.com/ncuillery/angular-breadcrumb/commit/ada09015c49f05a94349dabf078f1ed621811aaa), closes [#32](http://github.com/ncuillery/angular-breadcrumb/issues/32))
+  * add a configuration property for skipping a state in the breadcrumb ([dd255d90](http://github.com/ncuillery/angular-breadcrumb/commit/dd255d906c4231f44b48f066d4db197a9c6b9e27), closes [#9](http://github.com/ncuillery/angular-breadcrumb/issues/9))
+  * allow chain of states customization ([028e493a](http://github.com/ncuillery/angular-breadcrumb/commit/028e493a1ebcae5ae60b8a9d42b949262000d7df), closes [#7](http://github.com/ncuillery/angular-breadcrumb/issues/7))
+* **ncyBreadcrumb:**
+  * watch every expression founded in labels ([1363515e](http://github.com/ncuillery/angular-breadcrumb/commit/1363515e20977ce2f39a1f5e5e1d701f0d7af296))
+  * add 'Element' declaration style '<ncy-breadcrumb />' ([b51441ea](http://github.com/ncuillery/angular-breadcrumb/commit/b51441eafb1659b782fea1f8668c7f455e1d6b4d))
+* **ncyBreadcrumbLast:**
+  * add custom templating ([974f99b5](http://github.com/ncuillery/angular-breadcrumb/commit/974f99b584c85e45b1c0eb1acb4081bf103de06f))
+  * Add a new directive rendering the last step ([1eef24fb](http://github.com/ncuillery/angular-breadcrumb/commit/1eef24fbe862a1e3308181c38f50755843cf4426), closes [#37](http://github.com/ncuillery/angular-breadcrumb/issues/37))
+* **ncyBreadcrumbText:** Add ncyBreadcrumbText directive ([82b2b443](http://github.com/ncuillery/angular-breadcrumb/commit/82b2b443fab220cd9ac7d3a8c90c1edc4291e54a))
+
+
+#### Breaking Changes
+
+* state-level options has been moved under the custom key
+`ncyBreadcrumb` in state's configuration.
+
+To migrate the code follow the example below:
+```
+// Before
+$stateProvider.state('A', {
+  url: '/a',
+  data: {
+    ncyBreadcrumbLabel: 'State A'
+  }
+});
+```
+
+```
+// After
+$stateProvider.state('A', {
+  url: '/a',
+  ncyBreadcrumb: {
+    label: 'State A'
+  }
+});
+```
+See API reference on wiki for more informations.
+ ([1ea436d3](http://github.com/ncuillery/angular-breadcrumb/commit/1ea436d3f6d5470b7ae3e71e71259dbd2422bc00))
+
+
 <a name="0.5.0"></a>
 ## 0.5.0 (2016-11-14)
 

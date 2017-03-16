@@ -4,11 +4,11 @@ var LIVERELOAD_PORT = 35729;
 var lrSnippet = require('connect-livereload')({
   port: LIVERELOAD_PORT
 });
-var mountFolder = function (connect, dir) {
+var mountFolder = function(connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
@@ -106,45 +106,39 @@ module.exports = function (grunt) {
     },
     copy: {
       breadcrumb: {
-        files: [
-          {
-            flatten: true,
-            expand: true,
-            src: [
-              'src/angular-breadcrumb.js'
-            ],
-            dest: 'sample/asset/'
-          }
-        ]
+        files: [{
+          flatten: true,
+          expand: true,
+          src: [
+            'src/angular-breadcrumb.js'
+          ],
+          dest: 'sample/asset/'
+        }]
       },
       asset: {
-        files: [
-          {
-            flatten: true,
-            expand: true,
-            src: [
-              'dist/angular-breadcrumb.js',
-              'bower_components/angular/angular.js',
-              'bower_components/angular-ui-router/release/angular-ui-router.js',
-              'bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
-              'bower_components/bootstrap/docs/assets/css/bootstrap.css',
-              'bower_components/underscore/underscore.js'
-            ],
-            dest: 'sample/asset/'
-          }
-        ]
+        files: [{
+          flatten: true,
+          expand: true,
+          src: [
+            'dist/angular-breadcrumb.js',
+            'bower_components/angular/angular.js',
+            'bower_components/angular-ui-router/release/angular-ui-router.js',
+            'bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
+            'bower_components/bootstrap/docs/assets/css/bootstrap.css',
+            'bower_components/underscore/underscore.js'
+          ],
+          dest: 'sample/asset/'
+        }]
       },
       img: {
-        files: [
-          {
-            flatten: true,
-            expand: true,
-            src: [
-                'bower_components/bootstrap.css/img/glyphicons-halflings.png'
-            ],
-            dest: 'sample/img/'
-          }
-        ]
+        files: [{
+          flatten: true,
+          expand: true,
+          src: [
+            'bower_components/bootstrap.css/img/glyphicons-halflings.png'
+          ],
+          dest: 'sample/img/'
+        }]
       }
     },
     connect: {
@@ -154,7 +148,7 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               lrSnippet,
               mountFolder(connect, 'sample')
@@ -194,13 +188,11 @@ module.exports = function (grunt) {
         options: {
           archive: 'sample/<%= pkg.name %>-<%= pkg.version %>.zip'
         },
-        files: [
-          {
-            expand: true,
-            cwd: 'release/',
-            src: ['*.js']
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: 'release/',
+          src: ['*.js']
+        }]
       }
     },
     replace: {
@@ -208,13 +200,12 @@ module.exports = function (grunt) {
         src: ['sample/views/home.html'],
         overwrite: true,
         replacements: [{
-            from: /angular-breadcrumb-[0-9]+\.[0-9]+\.[0-9]+\.zip/g,
-            to: "angular-breadcrumb-<%= pkg.version %>.zip"
-          },
-          {
-            from: /\([0-9]+\.[0-9]+\.[0-9]+\)/g,
-            to: "(<%= pkg.version %>)"
-          }]
+          from: /angular-breadcrumb-[0-9]+\.[0-9]+\.[0-9]+\.zip/g,
+          to: "angular-breadcrumb-<%= pkg.version %>.zip"
+        }, {
+          from: /\([0-9]+\.[0-9]+\.[0-9]+\)/g,
+          to: "(<%= pkg.version %>)"
+        }]
       }
     },
     shell: {
@@ -263,13 +254,12 @@ module.exports = function (grunt) {
 
   grunt.registerTask('sample', ['concat:dev', 'copy:asset', 'copy:img', 'connect:livereload', 'open', 'watch']);
 
-  grunt.registerTask('release-prepare', 'Update all files for a release', function (target) {
+  grunt.registerTask('release-prepare', 'Update all files for a release', function(target) {
     if (!target) {
       target = 'patch';
     }
     grunt.task.run(
       'bump-only:' + target, // Version update
-      'test', // Tests
       'concat:release', // Concat with release banner
       'uglify:release', // Minify with release banner
       'changelog', // Changelog update
