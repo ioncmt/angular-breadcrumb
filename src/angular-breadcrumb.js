@@ -119,10 +119,12 @@ function $Breadcrumb() {
         var fn = isFunction ? parent : function() {
           return parent;
         };
+        //From here we have a function
+        isFunction = true;
         fn = isAngularDefinition ? parent.pop() : fn;
         fn.$inject = isAngularDefinition ? parent : [$lastViewScope];
 
-        var parentStateRef = isFunction ? fn.apply(this, fn.$inject) : $injector.invoke(fn);
+        var parentStateRef = isAngularDefinition ? $injector.invoke(fn) : fn.apply(this, fn.$inject);
         if (parentStateRef) {
           return parentStateRef;
         }
